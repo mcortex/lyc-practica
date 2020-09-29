@@ -1,20 +1,14 @@
-echo Compilando FLEX y BISON...
+echo Compilando FLEX...
 @echo off
-c:\GnuWin32\bin\flex Prueba_Lexico.l
+c:\GnuWin32\bin\flex Lexico.l
 rem pause
-c:\GnuWin32\bin\bison -dyv Prueba_Sintactico.y
-rem pause
-c:\MinGW\bin\gcc.exe lex.yy.c y.tab.c -o TPFinal.exe
+c:\MinGW\bin\gcc.exe lex.yy.c -o Ejercicio2.exe
 rem pause
 rem pause
-echo OK   Compilado y generado .exe
+echo OK - Compilado y generado .exe
 @echo on
-TPfinal.exe PruebaEjemplo.txt
+Ejercicio2.exe Ejercicio2.txt
 @echo off
 del lex.yy.c
-del y.tab.c
-del y.output
-del y.tab.h
-del TPFinal.exe
-
+del Ejercicio2.exe
 pause
