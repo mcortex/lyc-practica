@@ -1,0 +1,5 @@
+INICIO
+contador:=0;
+actual:=contador:=999;
+contador:=contador + 1/(actual*34);
+FIN
