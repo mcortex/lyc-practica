@@ -65,58 +65,6 @@ void verNodo(const char *p)
 
 /**Funciones de graphViz*/
 
-/* digraph BST {
-    node [fontname="Arial" ];
-    l1  [ label = "1" ];
-    l21 [ label = "0.4" ];
-    l22 [ label = "0.6" ];
-    l31 [ label = "0.21" ];
-    l32 [ label = "0.19" ];
-    l33 [ label = "0.21" ];
-    l34 [ label = "0.39" ];
-    l41 [ label = "0.09" ];
-    l42 [ label = "0.12" ];
-
-    l1  -> { l21 l22 };
-    l21 -> { l31 l32 };
-    l22 -> { l33 l34 };
-    l31 -> { l41 l42 };
-} */
-
-/* void bst_print_dot_aux(tArbol* pa, FILE* stream)
-{
-	if(*pa){
-		if (&(*pa)->izq){
-				if(&(*pa)->izq->info.dato)
-					fprintf(stream, "    %s -> %s;\n", (*pa)->info.dato,&(*pa)->izq->info.dato);
-				bst_print_dot_aux(&(*pa)->izq, stream);
-		}
-		
-		if (&(*pa)->der){
-			if(&(*pa)->izq->info.dato)
-				fprintf(stream, "    %s -> %s;\n", (*pa)->info.dato,&(*pa)->der->info.dato);
-			bst_print_dot_aux(&(*pa)->der, stream);
-		}
-	}
-}
-
-void bst_print_dot(tArbol* pa, FILE* stream)
-{
-    fprintf(stream, "digraph BST {\n");
-    fprintf(stream, "    node [fontname=\"Arial\"];\n");
-
-    if (!&(*pa))
-        fprintf(stream, "\n");
-    else if (!&(*pa)->der && !&(*pa)->izq)
-        fprintf(stream, "    %s;\n", (*pa)->info.dato);
-    else
-        bst_print_dot_aux(&(*pa), stream);
-
-    fprintf(stream, "}\n");
-} */
-
-
-
 void _tree_print_dot_subtree(int nro_padre, tNodo *padre, int nro, tArbol *nodo, FILE* stream)
 {
     if (*nodo != NULL)
