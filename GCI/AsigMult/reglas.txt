@@ -1,0 +1,7 @@
+**Inicia COMPILADOR**
+3. LISTA -> id asigna. 
+2. LISTA -> LISTA id asigna. 
+2. LISTA -> LISTA id asigna. 
+1. MULT -> LISTA cte.
+0. S -> MULT. 
+**Fin COMPILADOR ok**
