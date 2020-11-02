@@ -131,16 +131,16 @@ void _tree_print_dot_subtree(int nro_padre, tNodo *padre, int nro, tArbol *nodo,
             //printf("padre: %d\n", nro_padre);
             printf("x%d -> x%d;\n",nro_padre,nro);
         }   
-        _tree_print_dot_subtree(nro, nodo, 2 * nro + 1, &(*nodo)->izq, stream);
-        _tree_print_dot_subtree(nro, nodo, 2 * nro + 2, &(*nodo)->der, stream);
+        _tree_print_dot_subtree(nro, *nodo, 2 * nro + 1, &(*nodo)->izq, stream);
+        _tree_print_dot_subtree(nro, *nodo, 2 * nro + 2, &(*nodo)->der, stream);
         
     }
-    else {
+    /* else {
         fprintf(stream, "nil%d [label=nil,fontcolor=gray,shape=none];\n",nro);
         fprintf(stream, "x%d -> nil%d;\n",nro_padre,nro);
         printf("nil%d [label=nil,fontcolor=gray,shape=none];\n",nro);
         printf("x%d -> nil%d;\n",nro_padre,nro);
-    }
+    } */
 }
 
 void tree_print_dot(tArbol *p,FILE* stream)
