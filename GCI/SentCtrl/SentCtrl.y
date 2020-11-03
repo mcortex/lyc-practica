@@ -13,11 +13,13 @@ int valor_int;
 char *valor_string;
 }
 
+%token IF THEN ELSE
 %token P_A P_C
 %token PYC
 %token SUMA RESTA MULT DIV ASIG COMA
+%token MAY MEN MAY_I MEN_I CMP_I CMP_D
 %token <valor_string>ID
-%token <valor_int>CONST_INT
+%token <valor_int>CTE
 %token PROM
 %right ASIG
 %left SUMA
@@ -28,37 +30,34 @@ char *valor_string;
 %%
 programa:
     {printf("**Inicia COMPILADOR**\n"); } 
-    a {printf("0. A' -> A \n"); }
+    sel {printf("0. S -> SEL \n"); }
     {printf("**Fin COMPILADOR ok**\n"); }
     ;
 
-a:
-    ID ASIG p {printf("1. A -> id := P\n"); }
+sel:
+    ID ASIG if {printf("1. A -> id := P\n"); }
     ;
 
-p:
-    PROM P_A l P_C  {printf("2. P -> prom para L parc \n"); }
+if:
+    IF cond THEN expresion ELSE expresion {printf("2. IF -> if COND then E else E \n"); }
     ;
 
-l:
-    l COMA expresion {printf("3. L -> L coma E \n"); }
-    | expresion {printf("4. L -> F \n"); }
+cond:
+    ID MAY CTE {printf("3. COND -> id may cte \n"); }
+    | ID MEN CTE {printf("4. COND -> id men cte \n"); }
     ;
 
 expresion:
     expresion SUMA termino  {printf("5. E -> E + T \n"); }
-    | expresion RESTA termino {printf("6. E -> E - T \n"); }
-    | termino {printf("7. E -> T \n"); }
+    | termino {printf("6. E -> T \n"); }
     ;
 termino:
-    termino MULT factor {printf("8. T -> T * F \n"); }
-    | termino DIV factor {printf("9. E -> T / F \n"); }
-    | factor {printf("10. T -> F \n"); }
+    termino MULT factor {printf("7. T -> T * F \n"); }
+    | factor {printf("8. T -> F \n"); }
     ;
 factor:
-    P_A expresion P_C {printf("13. F -> ( E ) \n"); }
-    | ID {printf("11. F -> id (%s) \n", yylval.valor_string); }
-    | CONST_INT {printf("12. F -> cte(%d) \n", yylval.valor_int); }
+    ID {printf("9. F -> id (%s) \n", yylval.valor_string); }
+    | CTE {printf("10. F -> cte(%d) \n", yylval.valor_int); }
     ;
 %%
 
