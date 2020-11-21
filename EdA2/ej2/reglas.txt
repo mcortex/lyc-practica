@@ -1,0 +1,33 @@
+**Inicia COMPILADOR**
+R4: O -> + 
+R10: FACTOR -> id (w) 
+R9: TERM -> FACTOR 
+R7: EXP -> TERM 
+R11: FACTOR -> cte (7) 
+R9: TERM -> FACTOR 
+R11: FACTOR -> cte (3) 
+R8: TERM -> TERM * FACTOR 
+R10: FACTOR -> id (x) 
+R8: TERM -> TERM * FACTOR 
+R6: EXP -> EXP + TERM 
+R11: FACTOR -> cte (11) 
+R9: TERM -> FACTOR 
+R10: FACTOR -> id (y) 
+R8: TERM -> TERM * FACTOR 
+R6: EXP -> EXP + TERM 
+R2: L -> EXP 
+R11: FACTOR -> cte (3) 
+R9: TERM -> FACTOR 
+R7: EXP -> TERM 
+R3: L -> L ; EXP 
+R10: FACTOR -> id (z) 
+R9: TERM -> FACTOR 
+R7: EXP -> TERM 
+R10: FACTOR -> id (a) 
+R9: TERM -> FACTOR 
+R6: EXP -> EXP + TERM 
+R3: L -> L ; EXP 
+R1: OPLIST -> oplist [ O ( id ; id ) [ L ] ] 
+0. S -> MULT. 
+R0: S -> OPLIST 
+**Fin COMPILADOR ok**

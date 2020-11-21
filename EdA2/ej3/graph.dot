@@ -1,0 +1,11 @@
+digraph BST {
+x0 [label=<=>];
+x1 [label=<b>];
+x0 -> x1;
+x2 [label=<+>];
+x0 -> x2;
+x5 [label=<a>];
+x2 -> x5;
+x6 [label=<lista_vacia>];
+x2 -> x6;
+}

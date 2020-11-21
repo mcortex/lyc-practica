@@ -1,0 +1,25 @@
+S -> OPLIST
+OPLIST -> oplist [ O ( id ; id ) [ L ] ]
+L -> EXP
+L -> L ; EXP
+O -> +
+O -> *
+EXP -> EXP + TERM
+EXP -> TERM
+TERM -> TERM * FACTOR
+TERM -> FACTOR
+FACTOR -> id
+FACTOR -> cte
+
+S -> OPLIST
+OPLIST -> oplist ca O para id pyc id parc ca L cc cc
+L -> EXP
+L -> L pyc EXP
+O -> sum
+O -> mul
+EXP -> EXP sum TERM
+EXP -> TERM
+TERM -> TERM mul FACTOR
+TERM -> FACTOR
+FACTOR -> id
+FACTOR -> cte

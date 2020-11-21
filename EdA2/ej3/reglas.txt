@@ -1,0 +1,7 @@
+**Inicia COMPILADOR**
+R5: O -> + 
+R2: L -> lista_vacia 
+R1: OPLIST -> oplist [ O ( id ; id ) [ L ] ] 
+0. S -> MULT. 
+R0: S -> OPLIST 
+**Fin COMPILADOR ok**
