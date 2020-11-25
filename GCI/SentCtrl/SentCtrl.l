@@ -14,7 +14,7 @@ FILE  *yyin;
 DIGITO      [0-9]
 LETRA       [a-zA-Z]
 ID          {LETRA}({LETRA}|{DIGITO})*
-CTE     {DIGITO}+
+CTE         {DIGITO}+
 P_A         "("
 P_C         ")"
 ASIG        ":="
@@ -33,9 +33,10 @@ CMP_D       "!="
 
 
 %%
-"if"           {printf("\tLEX: PROM: %s \n", yytext);return IF;}
-"then"           {printf("\tLEX: PROM: %s \n", yytext);return THEN;}
-"else"           {printf("\tLEX: PROM: %s \n", yytext);return ELSE;}
+"if"           {printf("\tLEX: IF: %s \n", yytext);return IF;}
+"then"           {printf("\tLEX: THEN: %s \n", yytext);return THEN;}
+"else"           {printf("\tLEX: ELSE: %s \n", yytext);return ELSE;}
+"endif"           {printf("\tLEX: ENDIF: %s \n", yytext);return ENDIF;}
 {ID}            {printf("\tLEX: ID: %s \n", yytext); yylval.valor_string = strdup(yytext); return ID;}
 {CTE}     {printf("\tLEX: CTE: %s \n", yytext);yylval.valor_int = atoi(yytext); return CTE;}
 {P_A}           {printf("\tLEX: P_A: %s \n", yytext);return P_A;}

@@ -1,0 +1,31 @@
+digraph BST {
+x0 [label=<IF>];
+x1 [label=<MAY>];
+x0 -> x1;
+x3 [label=<b>];
+x1 -> x3;
+x4 [label=<0>];
+x1 -> x4;
+x2 [label=<CUERPO>];
+x0 -> x2;
+x5 [label=<:=>];
+x2 -> x5;
+x11 [label=<i>];
+x5 -> x11;
+x12 [label=<+>];
+x5 -> x12;
+x25 [label=<*>];
+x12 -> x25;
+x51 [label=<a>];
+x25 -> x51;
+x52 [label=<b>];
+x25 -> x52;
+x26 [label=<1>];
+x12 -> x26;
+x6 [label=<:=>];
+x2 -> x6;
+x13 [label=<i>];
+x6 -> x13;
+x14 [label=<25>];
+x6 -> x14;
+}

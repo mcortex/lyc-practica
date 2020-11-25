@@ -1,0 +1,15 @@
+R4: comparador -> > 
+3. cond -> id comparador cte 
+R10: FACTOR -> id (a) 
+R9: TERM -> FACTOR 
+R10: FACTOR -> id (b) 
+R8: TERM -> TERM * FACTOR 
+R7: EXP -> TERM 
+R11: FACTOR -> cte (1) 
+R9: TERM -> FACTOR 
+R6: EXP -> EXP + TERM 
+R11: FACTOR -> cte (25) 
+R9: TERM -> FACTOR 
+R7: EXP -> TERM 
+2. IF cond THEN accion ELSE accion ENDIF  
+0. S -> SEL 
