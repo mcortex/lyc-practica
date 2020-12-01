@@ -1,0 +1,10 @@
+10. WRITE -> write cte_s("Ingrese un valor pivot mayor o igual a 1: ") 
+3. SENT -> WRITE
+1. PROG -> SENT
+4. READ -> read id(pivot) 
+3. SENT -> READ
+2. PROG -> PROG SENT
+11. WRITE -> write id(pivot) 
+3. SENT -> WRITE
+2. PROG -> PROG SENT
+0. S -> PROG 

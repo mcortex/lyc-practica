@@ -1,0 +1,1 @@
+| "Ingrese un valor pivot mayor o igual a 1: " | WRITE | pivot | READ | pivot | @pivot | = | pivot | WRITE | 
