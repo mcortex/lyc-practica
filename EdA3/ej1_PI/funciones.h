@@ -39,9 +39,8 @@ TS_Reg tabla_simbolo[TAMANIO_TABLA];
 // -------------------- POLACA INVERSA
 typedef struct {
 	char dato[100];
-    // char tipo_dato[10];
 	int tipo_dato;
-    int posicion;
+  int posicion;
 }tInfo;
 
 typedef struct {
@@ -76,13 +75,6 @@ void validarCteEnTabla(char* nombre,int linea);
 void agregarValorACte(int tipo);
 void insertaMensaje (char * mensaje);
 void insertarEntero(int numero);
-
-// int verificarTipoDato(tArbol * p,int linea);
-// void verificarTipo(tArbol* p,int tipoAux,int linea);
-
-// void generarAsm(tArbol *p); // modificar
-// void recorrerArbol(tArbol *arbol,FILE * pf);// modificar
-// void tratarNodo(tArbol* nodo,FILE *pf);// modificar
 
 void generarAsm();
 void recorrerPolaca(FILE *);

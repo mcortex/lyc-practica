@@ -97,7 +97,7 @@ void grabarTabla(){
 	fprintf(arch, "............................................................................................................................................................................................................................................................................................\n");
 	for(i = 0; i <= indice_tabla; i++){
 		fprintf(arch, "%-50s", &(tabla_simbolo[i].nombre) );
-		printf("grabamos: %s - tipo_dato: %d - indice: %d\n", &(tabla_simbolo[i].nombre), tabla_simbolo[i].tipo_dato, i );
+		// printf("grabamos: %s - tipo_dato: %d - indice: %d\n", &(tabla_simbolo[i].nombre), tabla_simbolo[i].tipo_dato, i );
 		switch (tabla_simbolo[i].tipo_dato){
 		case Integer:
 			if(tabla_simbolo[i].esCteConNombre){
@@ -113,7 +113,6 @@ void grabarTabla(){
 			break;
 		case CteString:
 			fprintf(arch, "|%-50s|%-50s|%-50d|%s", "CTE_STRING",&(tabla_simbolo[i].valor_s), tabla_simbolo[i].longitud,"--");
-			// printf("|%-50s|%-50s|%-50d|%s\n", "CTE_STRING",&(tabla_simbolo[i].valor_s), tabla_simbolo[i].longitud,"--");
 			break;
 		}
 
@@ -151,19 +150,18 @@ void agregarCteATabla(int num){
 
 		case CteString:
 			strcpy(nombre,normalizarNombre(yylval.valor_string));
-			printf("nombre-------------------%s\n",nombre);	
+			// printf("nombre-------------------%s\n",nombre);	
 			memmove(&nombre[0], &nombre[1], strlen(nombre));//Remover el primer guion "_"
 			if(buscarEnTabla(nombre) == -1){
 			//Agregar nombre a tabla
 				indice_tabla ++;
 				strcpy(tabla_simbolo[indice_tabla].nombre,normalizarNombre(yylval.valor_string));
-				printf("Agregar nombre a tabla: tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);	
-				printf("indice_tabla:  %d\n",indice_tabla);
-				// printf("tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);				
+				// printf("Agregar nombre a tabla: tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);	
+				// printf("indice_tabla:  %d\n",indice_tabla);				
 				//Agregar tipo de dato
 				tabla_simbolo[indice_tabla].tipo_dato = CteString;
-				printf("Agregar tipo de dato: tabla_simbolo[indice_tabla].tipo_dato-------------------%d\n",tabla_simbolo[indice_tabla].tipo_dato);
-				printf("indice_tabla:  %d\n",indice_tabla);
+				// printf("Agregar tipo de dato: tabla_simbolo[indice_tabla].tipo_dato-------------------%d\n",tabla_simbolo[indice_tabla].tipo_dato);
+				// printf("indice_tabla:  %d\n",indice_tabla);
 
 				//Agregar valor a la tabla
 				int length = strlen(yylval.valor_string);
@@ -177,13 +175,13 @@ void agregarCteATabla(int num){
 				auxiliar[strlen(auxiliar)-1] = '\0';
 				
 				strcpy(tabla_simbolo[indice_tabla].valor_s, auxiliar+1);
-				printf("Agregar valor a la tabla: tabla_simbolo[indice_tabla].valor_s-------------------%s\n",tabla_simbolo[indice_tabla].valor_s);	
-				printf("indice_tabla:  %d\n",indice_tabla);
+				// printf("Agregar valor a la tabla: tabla_simbolo[indice_tabla].valor_s-------------------%s\n",tabla_simbolo[indice_tabla].valor_s);	
+				// printf("indice_tabla:  %d\n",indice_tabla);
 				
 				//Agregar longitud
 				tabla_simbolo[indice_tabla].longitud = length -2;
-				printf("Agregar longitud: tabla_simbolo[indice_tabla].longitud-------------------%d\n",tabla_simbolo[indice_tabla].longitud);
-				printf("indice_tabla:  %d\n",indice_tabla);	
+				// printf("Agregar longitud: tabla_simbolo[indice_tabla].longitud-------------------%d\n",tabla_simbolo[indice_tabla].longitud);
+				// printf("indice_tabla:  %d\n",indice_tabla);	
 				
 			}
 			
@@ -217,7 +215,7 @@ void agregarCteATabla(int num){
 void insertaMensaje (char * mensaje) {
 			char nombre[100];
 			strcpy(nombre,normalizarNombre(mensaje));
-			printf("nombre-------------------%s\n",nombre);	
+			// printf("nombre-------------------%s\n",nombre);	
 			memmove(&nombre[0], &nombre[1], strlen(nombre));//Remover el primer guion "_"
 			if(buscarEnTabla(nombre) == -1){
 			//Agregar nombre a tabla
@@ -354,6 +352,7 @@ void insertaEnPolaca(char * dato, int tipo_dato) {
 }
 
 void muestraPolaca(){
+	printf("---------------MOSTRAR POLACA INVERSA---------------\n");
     int i;
     printf("|");
     for(i=0;i<cursor;i++) {
@@ -396,7 +395,7 @@ void escribirEnCeldaXMasUno(int posicion) {
 }
 
 void grabarPolaca(){
-	
+	printf("---------------GENERAMOS POLACA INVERSA---------------\n");
 	int i;
 	FILE *polaca;
 	
@@ -491,7 +490,7 @@ void recorrerPolaca(FILE * pf){
 	
     for(i=0;i<cursor;i++) {
 		cell = &(polaca_inversa[i].celda);
-		printf("tratamos la celda: %s\n", cell->dato);
+		// printf("tratamos la celda: %s\n", cell->dato);
 		tratarCelda(cell, pf);
     }
 }
@@ -526,21 +525,20 @@ void tratarCelda(tInfo *cel,FILE *pf){
 		break;
 	}
 	// Si esta en la tabla de simbolos apilo operando
-	printf("pos: %d\n",pos);
 	if(pos!=-1){
 		strcpy(cel->dato,normalizarId(aux_str));
-		printf("encolamos operando: %s\n", cel->dato);
+		// printf("encolamos operando: %s\n", cel->dato);
 		ponerenPila(pilaAsm,cel);
 	}	
 	
 	//WRITE
 	if(strcmp(aux_str,"WRITE")==0){
 		auxPtr = topedePila(pilaAsm);
-		printf("WRITE string aux: %s tipo dato: %d\n",auxPtr->dato,cel->tipo_dato);
+		// printf("WRITE string aux: %s tipo dato: %d\n",auxPtr->dato,cel->tipo_dato);
 		switch(auxPtr->tipo_dato){
 			case Integer:
 			case CteInt:
-				printf("WRITE cteint: %s\n",auxPtr->dato);
+				// printf("WRITE cteint: %s\n",auxPtr->dato);
 				fprintf(pf,"\tdisplayInteger \t@%s,3\n\tnewLine 1\n",auxPtr->dato);
 			break;
 			case String:
@@ -554,7 +552,7 @@ void tratarCelda(tInfo *cel,FILE *pf){
 
 	if(strcmp(aux_str,"READ")==0){
 		auxPtr = topedePila(pilaAsm);
-		printf("READ string aux: %s tipo dato: %d\n",auxPtr->dato,cel->tipo_dato);
+		// printf("READ string aux: %s tipo dato: %d\n",auxPtr->dato,cel->tipo_dato);
 		switch(auxPtr->tipo_dato){
 			case Integer:
 				fprintf(pf,"\tGetInteger \t@%s\n",auxPtr->dato);

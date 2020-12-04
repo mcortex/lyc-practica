@@ -119,8 +119,8 @@ read:
 
 
             insertaEnPolaca($2,Integer); // ID
-            insertaEnPolaca("READ",SinTipo); // WRITE
-            // ASIGNO EL VALOR LEIDO DE STDIN A PIVOT
+            insertaEnPolaca("READ",SinTipo); // READ
+            // ASIGNO EL VALOR LEIDO DE STDIN A TOPE
             insertaEnPolaca($2,Integer);
             insertaEnPolaca("@tope",Integer);
             insertaEnPolaca("=",SinTipo);
@@ -143,25 +143,16 @@ asig:
                         agregarVarATabla("@tope",!ES_CTE_CON_NOMBRE,yylineno);
 			            cantVarsADeclarar++;
                         tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
-                        // agregarVarATabla("@cant_elem",ES_CTE_CON_NOMBRE,yylineno);
-			            // cantVarsADeclarar++;
-                        // tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
 
                         if(lista_vacia_flag == 1){
-                            printf("-- %s = 0 -  %s-- \n",$1,msg_error3);
+                            // printf("-- %s = 0 -  %s-- \n",$1,msg_error3);
 
                             insertaEnPolaca(msg_error3,CteString);
                             insertaEnPolaca("WRITE",SinTipo);
                             insertaEnPolaca("0",CteInt);
-                            
-                            // strcpy(yylval.valor_string,msg_error3);
-                            // agregarCteATabla(CteString);
-                            // agregarValorACte(CteString);
-                            
-                            
                             }
                         else {
-                            printf("Asigna resultado a id(%s)\n",$1);
+                            // printf("Asigna resultado a id(%s)\n",$1);
                             insertaEnPolaca("@suma",CteInt);
                             }
                         insertaEnPolaca($1,CteInt);
@@ -172,19 +163,12 @@ asig:
     ;
 
 sumaimpar:
-            SUMAIMPAR PARA ID PYC CA {int pos = chequearVarEnTabla($3,yylineno);
-            
-                                    
-                                    
-            
-            
-            } lista CC PARC {
+            SUMAIMPAR PARA ID PYC CA {int pos = chequearVarEnTabla($3,yylineno);} 
+            lista CC PARC {
                                     fprintf(fp,"6. SUMAIMPAR -> sumaimpar para id pyc ca LISTA cc parc\n");
-                                    printf("cantidad de componentes: %d\n",cant_elem);
-                                    printf("cantidad de impares: %d\n",cant_impares);
+                                    // printf("cantidad de componentes: %d\n",cant_elem);
+                                    // printf("cantidad de impares: %d\n",cant_impares);
                                     
-                                    
-
                                     insertarEntero(cant_elem);
                                     insertarEntero(cant_impares);
                                     insertarEntero(nulo);
@@ -218,7 +202,7 @@ sumaimpar:
                                     sprintf(str_aux, "%d",cant_impares);
                                     insertaEnPolaca(str_aux,CteInt);
                                     insertaEnPolaca("@tope",Integer);
-                                    insertaEnPolaca("CMP",SinTipo); // cant_impares < tope? true: No existen suficientes elementos impares, false: siguiente if
+                                    insertaEnPolaca("CMP",SinTipo); // cant_impares < tope? true: No existen suficientes elementos impares, false: fin
                                     insertaEnPolaca("BGE",SinTipo);
                                     push(pilaPosicion,cursor); // apilar nro celda actual
                                     avanzar();
@@ -247,13 +231,7 @@ sumaimpar:
                                 int pos = chequearVarEnTabla(yylval.valor_string,yylineno);
                                 fprintf(fp,"7. SUMAIMPAR -> sumaimpar para id pyc ca cc parc\n");
                                 lista_vacia_flag=1;
-                                // strcpy(yylval.valor_string,msg_error3);
-                                // agregarCteATabla(CteString);
-
                                 insertaMensaje(msg_error3);
-
-                                // yylval.valor_int=nulo;
-                                // agregarCteATabla(CteInt);
                                 insertarEntero(nulo);
                                 }
             ;
@@ -265,7 +243,7 @@ lista:
         cant_elem=1;
 
         if(($1 % 2) != 0){
-            printf("cte(%d) es impar -> encolamos\n", yylval.valor_int);
+            // printf("cte(%d) es impar -> encolamos\n", yylval.valor_int);
 
             agregarCteATabla(CteInt); // solo agrego a la TS las ctes con las que voy a operar
             
@@ -306,7 +284,7 @@ lista:
                         cant_elem++;
                         
                         if(($3 % 2) != 0){
-                            printf("cte(%d) es impar -> encolamos\n", yylval.valor_int);
+                            // printf("cte(%d) es impar -> encolamos\n", yylval.valor_int);
                             
                             agregarCteATabla(CteInt);
 
@@ -336,9 +314,9 @@ lista:
                             
                            
                         }
-                        else{
-                            printf("cte(%d) es par -> omitimos\n", yylval.valor_int);
-                        }
+                        // else{
+                        //     printf("cte(%d) es par -> omitimos\n", yylval.valor_int);
+                        // }
                     }
     ;
 
@@ -367,8 +345,6 @@ write:
 int main(int argc,char *argv[])
 {
     
-    //   pilaCondicion = crearPila();
-    //   pilaEtiq = crearPila();
       fp = fopen("reglas.txt","w"); 
       if (!fp)
             printf("\nNo se puede abrir el archivo reglas.txt \n");
@@ -383,9 +359,7 @@ int main(int argc,char *argv[])
             fclose(yyin);
       }
     generarAsm();
-    fclose(fp);     
-    //   vaciarPila(pilaCondicion);
-    //   vaciarPila(pilaEtiq);
+    fclose(fp);
 
       return 0;
 }

@@ -9,6 +9,8 @@
 9. LISTA -> LISTA coma cte
 9. LISTA -> LISTA coma cte
 9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
 6. SUMAIMPAR -> sumaimpar para id pyc ca LISTA cc parc
 5. ASIG -> id asigna SUMAIMPAR
 3. SENT -> ASIG
