@@ -33,7 +33,6 @@ int cantVarsADeclarar = 0;
 int tipoDatoADeclarar[TAMANIO_TABLA];
 int indiceDatoADeclarar = 0;
 int indice_tabla = -1;
-// int contCuerpo = 0;
 int auxOperaciones=0;
 int contCond=0;
 
@@ -43,7 +42,7 @@ st *pilaPosicion;
 
 char * msg_error1="No existen suficientes elementos impares para el calculo";
 char * msg_error2="La lista tiene menos elementos que el indicado";
-char * msg_error3="Le resultado es: ";
+char * msg_error3="La lista está vacia";
 
 %}
 
@@ -121,7 +120,7 @@ read:
             insertaEnPolaca("READ",SinTipo); // WRITE
             // ASIGNO EL VALOR LEIDO DE STDIN A PIVOT
             insertaEnPolaca($2,Integer);
-            insertaEnPolaca("@pivot",Integer);
+            insertaEnPolaca("@tope",Integer);
             insertaEnPolaca("=",SinTipo);
             }
     
@@ -136,6 +135,15 @@ asig:
                         varADeclarar1 = indice_tabla;
                         cantVarsADeclarar++;
                         tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
+                        agregarVarATabla("@suma",!ES_CTE_CON_NOMBRE,yylineno);
+			            cantVarsADeclarar++;
+                        tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
+                        agregarVarATabla("@tope",!ES_CTE_CON_NOMBRE,yylineno);
+			            cantVarsADeclarar++;
+                        tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
+                        // agregarVarATabla("@aux",!ES_CTE_CON_NOMBRE,yylineno);
+			            // cantVarsADeclarar++;
+                        // tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
 
                         if(lista_vacia_flag == 1){
                             printf("%s = 0 -  %s\n",$1,msg_error3);
@@ -157,52 +165,46 @@ asig:
 sumaimpar:
             SUMAIMPAR PARA ID PYC CA lista CC PARC {
                                     fprintf(fp,"6. SUMAIMPAR -> sumaimpar para id pyc ca LISTA cc parc\n");
-                                    printf("cantidad de componentes: %d\n",cant_elem);
-                                    printf("cantidad de impares: %d\n",cant_impares);
-
-                                    // int pos = chequearVarEnTabla(yylval.valor_string,yylineno);
+                                    // printf("cantidad de componentes: %d\n",cant_elem);
+                                    // printf("cantidad de impares: %d\n",cant_impares);
                                     
                                     int pos = chequearVarEnTabla($3,yylineno);
+            
 
-                                    //IF(cant_elem<@pivot)
+                                    // //IF(cant_elem<id)
                                     // sprintf(str_aux, "%d",cant_elem);
-                                    // insertaEnPolaca(str_aux,CteInt);
-                                    // insertaEnPolaca($3,CteInt);
-                                    // insertaEnPolaca("CMP","CMP");
-                                    // insertaEnPolaca("BGE","jae");
-                                    // sprintf(str_aux, "%d",cursor); // #celda actual; 
-                                    // push(pilaPosicion,str_aux); // apilar #celda actual; 
-                                    // avanzar(); // avanzar()
+                                    // insertaEnPolaca(cant_elem);
+                                    // insertaEnPolaca(id);
+                                    // insertaEnPolaca("CMP");
+                                    // insertaEnPolaca("BGE";
+                                    // push(pilaPosicion,cursor);//apilar #celda actual; 
+                                    // avanzar();
                                     // //THEN
-                                    // insertaEnPolaca(msg_error2,"cte_string");
-                                    // insertaEnPolaca("BI","jmp");
-                                    // strcpy(str_aux,pop(pilaPosicion)); // desapilarX (tope_pila) o str_aux=pop(pilaPosicion); // desapilarX (tope_pila)
-                                    // pos_aux = atoi(str_aux);
+                                    // insertaEnPolaca(msg_error2);
+                                    // insertaEnPolaca("BI");
+                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
                                     // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
-                                    // sprintf(str_aux, "%d",cursor); // #celda actual; 
-                                    // push(pilaPosicion,str_aux); // apilar #celda actual; 
-                                    // avanzar(); // avanzar()
+                                    // push(pilaPosicion,cursor);//apilar #celda actual;
+                                    // avanzar();
                                     // //ELSE
-                                    // //IF(cant_impares>=@pivot)
-                                    // sprintf(str_aux, "%d",cant_impares);
-                                    // insertaEnPolaca(str_aux,CteInt);
-                                    // insertaEnPolaca($3,CteInt);
-                                    // insertaEnPolaca("CMP","CMP");
-                                    // insertaEnPolaca("BLT","jb");
-                                    // sprintf(str_aux, "%d",cursor); // #celda actual; 
-                                    // push(pilaPosicion,str_aux); // apilar #celda actual; 
-                                    // avanzar(); // avanzar()
+                                    // //IF(cant_impares>=id)
+                                    // insertaEnPolaca(cant_impares);
+                                    // insertaEnPolaca(id);
+                                    // insertaEnPolaca("CMP");
+                                    // insertaEnPolaca("BLT");
+                                    // push(pilaPosicion,cursor);//apilar #celda actual; 
+                                    // avanzar();
                                     // //THEN
-                                    // insertaEnPolaca(msg_error1,"cte_string");
-                                    // insertaEnPolaca("BI","jmp");
-                                    // strcpy(str_aux,pop(pilaPosicion)); // desapilarX (tope_pila) o str_aux=pop(pilaPosicion); // desapilarX (tope_pila)
-                                    // pos_aux = atoi(str_aux);
+                                    // insertaEnPolaca(msg_error1);
+                                    // insertaEnPolaca("BI");
+                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
                                     // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
-                                    // sprintf(str_aux, "%d",cursor); // #celda actual; 
-                                    // push(pilaPosicion,str_aux); // apilar #celda actual; 
-                                    // avanzar(); // avanzar()
+                                    // push(pilaPosicion,cursor);//apilar #celda actual;
+                                    // avanzar();
                                     // //ELSE
-                                    // insertaEnPolaca($3,CteInt);
+                                    // insertaEnPolaca(id);
+                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
+                                    // push(pilaPosicion,cursor);//apilar #celda actual;
 
                                     }
             | SUMAIMPAR PARA ID PYC CA CC PARC {
@@ -224,10 +226,14 @@ lista:
             agregarCteATabla(CteInt); // solo agrego a la TS las ctes con las que voy a operar
             
             cant_impares++;
+            yylval.valor_int=cant_impares;
+            agregarCteATabla(CteInt);
+            
+
             sprintf(str_aux, "%d",cant_impares);
-            insertaEnPolaca("@pivot",Integer);
+            insertaEnPolaca("@tope",Integer);
             insertaEnPolaca(str_aux,CteInt);
-            insertaEnPolaca("CMP",SinTipo); // pivot >= cant_impares? true: suma=suma+CTE, false: siguiente if
+            insertaEnPolaca("CMP",SinTipo); // tope >= cant_impares? true: suma=suma+CTE, false: siguiente if
             insertaEnPolaca("BLT",SinTipo);
             push(pilaPosicion,cursor);
             //printf("posicion apilada: %d\n",cursor);
@@ -236,11 +242,14 @@ lista:
             insertaEnPolaca("@suma",CteInt);
             insertaEnPolaca(str_aux,CteInt);
             insertaEnPolaca("+",SinTipo);
+            auxOperaciones++;
             insertaEnPolaca("@suma",CteInt);
             insertaEnPolaca("=",SinTipo);
             pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
-            //printf("posicion desapilada: %d\n",pos_aux);
-            escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1           
+            escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1 
+
+            sprintf(str_aux, "#ETIQ%d:",cursor);
+            insertaEnPolaca(str_aux,SinTipo);      
 
         }
         // else{
@@ -258,23 +267,29 @@ lista:
                             agregarCteATabla(CteInt);
 
                             cant_impares++;
+                            yylval.valor_int=cant_impares;
+                            agregarCteATabla(CteInt);
+
                             sprintf(str_aux, "%d",cant_impares);
-                            insertaEnPolaca("@pivot",Integer);
+                            insertaEnPolaca("@tope",Integer);
                             insertaEnPolaca(str_aux,CteInt);
-                            insertaEnPolaca("CMP",SinTipo); // pivot >= cant_impares? true: suma=suma+CTE, false: siguiente if
+                            insertaEnPolaca("CMP",SinTipo); // tope >= cant_impares? true: suma=suma+CTE, false: siguiente if
                             insertaEnPolaca("BLT",SinTipo);
                             push(pilaPosicion,cursor);
-                            //printf("posicion apilada: %d\n",cursor);
                             avanzar();
                             sprintf(str_aux, "%d",$3);
                             insertaEnPolaca("@suma",CteInt);
                             insertaEnPolaca(str_aux,CteInt);
                             insertaEnPolaca("+",SinTipo);
+                            auxOperaciones++;
                             insertaEnPolaca("@suma",CteInt);
                             insertaEnPolaca("=",SinTipo);
                             pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
-                            //printf("posicion desapilada: %d\n",pos_aux);
                             escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
+
+                            sprintf(str_aux, "#ETIQ%d:",cursor);
+                            insertaEnPolaca(str_aux,SinTipo);
+                            
                            
                         }
                         else{
@@ -307,8 +322,7 @@ write:
 
 int main(int argc,char *argv[])
 {
-    //   pilaExpresion = crearPila();      
-    //   pilaBloque = crearPila();
+    
     //   pilaCondicion = crearPila();
     //   pilaEtiq = crearPila();
       fp = fopen("reglas.txt","w"); 
@@ -325,29 +339,9 @@ int main(int argc,char *argv[])
             fclose(yyin);
       }
     generarAsm();
-    fclose(fp);
-    //   vaciarPila(pilaExpresion);      
-    //   vaciarPila(pilaBloque);      
+    fclose(fp);     
     //   vaciarPila(pilaCondicion);
     //   vaciarPila(pilaEtiq);
 
       return 0;
 }
-
-
-
-// OPERACIONES QUE HACEN QUE FRENE LA POLACA:
-// WRITE, READ: unarios -> apilan un solo operando (n-1) 
-// SUMA, ASIGNACION -> apilan dos operandos (n-1)(n-2)
-// tipos de datos: cte_int cte_string var_int(id)
-//
-
-/* void recorrePolaca(){
-    int i;
-    printf("|");
-    for(i=0;i<cursor;i++) {
-        //printf("%s(%s)(pos:%d)|",polaca_inversa[i].celda.dato,polaca_inversa[i].celda.tipo_dato,polaca_inversa[i].celda.posicion);
-        printf("%s(%s)|",polaca_inversa[i].celda.dato,polaca_inversa[i].celda.tipo_dato);
-    }
-    printf("\n");
-} */

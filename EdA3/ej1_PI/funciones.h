@@ -106,5 +106,6 @@ void borrarPila(struct m10_stack_t **);
 typedef struct m10_stack_t m10_stack_t;
 
 tInfo * auxPtr;
+tInfo * auxPtr2;
 
 #endif

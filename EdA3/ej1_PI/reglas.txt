@@ -4,7 +4,21 @@
 4. READ -> read id(pivot) 
 3. SENT -> READ
 2. PROG -> PROG SENT
-11. WRITE -> write id(pivot) 
+8. LISTA -> cte
+9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
+9. LISTA -> LISTA coma cte
+6. SUMAIMPAR -> sumaimpar para id pyc ca LISTA cc parc
+5. ASIG -> id asigna SUMAIMPAR
+3. SENT -> ASIG
+2. PROG -> PROG SENT
+10. WRITE -> write cte_s("El resultado es: ") 
+3. SENT -> WRITE
+2. PROG -> PROG SENT
+11. WRITE -> write id(resul) 
 3. SENT -> WRITE
 2. PROG -> PROG SENT
 0. S -> PROG 

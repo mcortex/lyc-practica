@@ -1,1 +1,1 @@
-| "Ingrese un valor pivot mayor o igual a 1: " | WRITE | pivot | READ | pivot | @pivot | = | pivot | WRITE | 
+| "Ingrese un valor pivot mayor o igual a 1: " | WRITE | pivot | READ | pivot | @tope | = | @tope | 1 | CMP | BLT | #ETIQ17 | @suma | 21 | + | @suma | = | #ETIQ17: | @tope | 2 | CMP | BLT | #ETIQ28 | @suma | 7 | + | @suma | = | #ETIQ28: | @tope | 3 | CMP | BLT | #ETIQ39 | @suma | 33 | + | @suma | = | #ETIQ39: | @tope | 4 | CMP | BLT | #ETIQ50 | @suma | 5 | + | @suma | = | #ETIQ50: | @suma | resul | = | "El resultado es: " | WRITE | resul | WRITE | 
