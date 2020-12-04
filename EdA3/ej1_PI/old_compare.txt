@@ -1,0 +1,88 @@
+
+                                    // //IF(cant_elem<id)
+                                    // sprintf(str_aux, "%d",cant_elem);
+                                    // insertaEnPolaca(cant_elem);
+                                    // insertaEnPolaca(id);
+                                    // insertaEnPolaca("CMP");
+                                    // insertaEnPolaca("BGE";
+                                    // push(pilaPosicion,cursor);//apilar #celda actual; 
+                                    // avanzar();
+                                    // //THEN
+                                    // insertaEnPolaca(msg_error2);
+                                    // insertaEnPolaca("BI");
+                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
+                                    // push(pilaPosicion,cursor);//apilar #celda actual;
+                                    // avanzar();
+                                    // //ELSE
+                                    // //IF(cant_impares>=id)
+                                    // insertaEnPolaca(cant_impares);
+                                    // insertaEnPolaca(id);
+                                    // insertaEnPolaca("CMP");
+                                    // insertaEnPolaca("BLT");
+                                    // push(pilaPosicion,cursor);//apilar #celda actual; 
+                                    // avanzar();
+                                    // //THEN
+                                    // insertaEnPolaca(msg_error1);
+                                    // insertaEnPolaca("BI");
+                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
+                                    // push(pilaPosicion,cursor);//apilar #celda actual;
+                                    // avanzar();
+                                    // //ELSE
+                                    // insertaEnPolaca(id);
+                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
+                                    // push(pilaPosicion,cursor);//apilar #celda actual;
+
+
+
+
+
+------------------------------------
+
+v2
+
+ // // IF cant_elem < tope
+                                    // sprintf(str_aux, "%d",cant_elem);
+                                    // insertaEnPolaca(str_aux,CteInt);
+                                    // insertaEnPolaca("@tope",Integer);
+                                    // insertaEnPolaca("CMP",SinTipo); // cant_elem < tope? true: La lista tiene menos elementos que el indicado, false: siguiente if
+                                    // insertaEnPolaca("BGE",SinTipo);
+                                    // push(pilaPosicion,cursor);
+                                    // //printf("posicion apilada: %d\n",cursor);
+                                    // avanzar();
+                                    // insertaEnPolaca(msg_error2,CteString); //La lista tiene menos elementos que el indicado
+                                    // insertaEnPolaca("WRITE",SinTipo);
+
+                                    // insertaEnPolaca("0",CteInt);
+                                    // insertaEnPolaca("@suma",CteInt);
+                                    // insertaEnPolaca("=",SinTipo);
+
+                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1 
+                                    // sprintf(str_aux, "#ETIQ%d:",cursor);
+                                    // insertaEnPolaca(str_aux,SinTipo);
+                                    
+                                    // // insertaEnPolaca("BI",SinTipo);
+                                    // // push(pilaPosicion,cursor);
+
+                                    // // IF cant_impares < tope
+                                    // sprintf(str_aux, "%d",cant_impares);
+                                    // insertaEnPolaca(str_aux,CteInt);
+                                    // insertaEnPolaca("@tope",Integer);
+                                    // insertaEnPolaca("CMP",SinTipo); // cant_impares < tope? true: No existen suficientes elementos impares, false: siguiente if
+                                    // insertaEnPolaca("BGE",SinTipo);
+                                    // push(pilaPosicion,cursor);
+                                    // //printf("posicion apilada: %d\n",cursor);
+                                    // avanzar();
+                                    // insertaEnPolaca(msg_error1,CteString); //No existen suficientes elementos impares
+                                    // insertaEnPolaca("WRITE",SinTipo);
+
+                                    // insertaEnPolaca("0",CteInt);
+                                    // insertaEnPolaca("@suma",CteInt);
+                                    // insertaEnPolaca("=",SinTipo);
+
+                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1 
+                                    // sprintf(str_aux, "#ETIQ%d:",cursor);
+                                    // insertaEnPolaca(str_aux,SinTipo);  

@@ -8,28 +8,22 @@ include number.asm
 .DATA
 
 	MAXTEXTSIZE equ 50
+	@_No_existen_suficientes_elementos_impares 	DB "No existen suficientes elementos impares",'$',10 dup(?)
+	@_La_lista_tiene_menos_elementos_que_el_indicado 	DB "La lista tiene menos elementos que el indicado",'$',4 dup(?)
 	@_Ingrese_un_valor_pivot_mayor_o_igual_a_1__ 	DB "Ingrese un valor pivot mayor o igual a 1: ",'$',8 dup(?)
 	@_pivot 	DD 0
-	@_21 	DD 21
 	@_1 	DD 1
-	@_7 	DD 7
-	@_2 	DD 2
-	@_33 	DD 33
 	@_3 	DD 3
+	@_2 	DD 2
 	@_5 	DD 5
-	@_4 	DD 4
+	@_0 	DD 0
 	@_resul 	DD 0
 	@_@suma 	DD 0
 	@_@tope 	DD 0
 	@_El_resultado_es__ 	DB "El resultado es: ",'$',33 dup(?)
-	@_auxR0 	DD 0.0
 	@_auxE0 	DD 0
-	@_auxR1 	DD 0.0
 	@_auxE1 	DD 0
-	@_auxR2 	DD 0.0
 	@_auxE2 	DD 0
-	@_auxR3 	DD 0.0
-	@_auxE3 	DD 0
 
 .CODE
 .startup
@@ -50,7 +44,7 @@ include number.asm
 	fwait
 	sahf
 	jb		ETIQ17
-	fild 	@_21
+	fild 	@_1
 	fiadd 	@_@suma
 	fistp 	@_auxE0
 	fild 	@_auxE0
@@ -63,7 +57,7 @@ ETIQ17:
 	fwait
 	sahf
 	jb		ETIQ28
-	fild 	@_7
+	fild 	@_3
 	fiadd 	@_@suma
 	fistp 	@_auxE0
 	fild 	@_auxE0
@@ -76,25 +70,38 @@ ETIQ28:
 	fwait
 	sahf
 	jb		ETIQ39
-	fild 	@_33
-	fiadd 	@_@suma
-	fistp 	@_auxE0
-	fild 	@_auxE0
-	fistp 	@_@suma
-ETIQ39:
-	fild 	@_4
-	fild 	@_@tope
-	fcomp
-	fstsw	ax
-	fwait
-	sahf
-	jb		ETIQ50
 	fild 	@_5
 	fiadd 	@_@suma
 	fistp 	@_auxE0
 	fild 	@_auxE0
 	fistp 	@_@suma
-ETIQ50:
+ETIQ39:
+	fild 	@_@tope
+	fild 	@_5
+	fcomp
+	fstsw	ax
+	fwait
+	sahf
+	jae		ETIQ52
+	displayString 	@_La_lista_tiene_menos_elementos_que_el_indicado
+	newLine 1
+	fild 	@_0
+	fistp 	@_@suma
+	jmp		ETIQ64
+ETIQ52:
+	fild 	@_@tope
+	fild 	@_3
+	fcomp
+	fstsw	ax
+	fwait
+	sahf
+	jae		ETIQ63
+	displayString 	@_No_existen_suficientes_elementos_impares
+	newLine 1
+	fild 	@_0
+	fistp 	@_@suma
+ETIQ63:
+ETIQ64:
 	fild 	@_@suma
 	fistp 	@_resul
 	displayString 	@_El_resultado_es__

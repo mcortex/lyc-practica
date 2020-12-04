@@ -97,7 +97,7 @@ void grabarTabla(){
 	fprintf(arch, "............................................................................................................................................................................................................................................................................................\n");
 	for(i = 0; i <= indice_tabla; i++){
 		fprintf(arch, "%-50s", &(tabla_simbolo[i].nombre) );
-			
+		printf("grabamos: %s - tipo_dato: %d - indice: %d\n", &(tabla_simbolo[i].nombre), tabla_simbolo[i].tipo_dato, i );
 		switch (tabla_simbolo[i].tipo_dato){
 		case Integer:
 			if(tabla_simbolo[i].esCteConNombre){
@@ -113,6 +113,7 @@ void grabarTabla(){
 			break;
 		case CteString:
 			fprintf(arch, "|%-50s|%-50s|%-50d|%s", "CTE_STRING",&(tabla_simbolo[i].valor_s), tabla_simbolo[i].longitud,"--");
+			// printf("|%-50s|%-50s|%-50d|%s\n", "CTE_STRING",&(tabla_simbolo[i].valor_s), tabla_simbolo[i].longitud,"--");
 			break;
 		}
 
@@ -150,24 +151,42 @@ void agregarCteATabla(int num){
 
 		case CteString:
 			strcpy(nombre,normalizarNombre(yylval.valor_string));
+			printf("nombre-------------------%s\n",nombre);	
 			memmove(&nombre[0], &nombre[1], strlen(nombre));//Remover el primer guion "_"
 			if(buscarEnTabla(nombre) == -1){
 			//Agregar nombre a tabla
 				indice_tabla ++;
-				strcpy(tabla_simbolo[indice_tabla].nombre,normalizarNombre(yylval.valor_string));				
+				strcpy(tabla_simbolo[indice_tabla].nombre,normalizarNombre(yylval.valor_string));
+				printf("Agregar nombre a tabla: tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);	
+				printf("indice_tabla:  %d\n",indice_tabla);
+				// printf("tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);				
 				//Agregar tipo de dato
 				tabla_simbolo[indice_tabla].tipo_dato = CteString;
+				printf("Agregar tipo de dato: tabla_simbolo[indice_tabla].tipo_dato-------------------%d\n",tabla_simbolo[indice_tabla].tipo_dato);
+				printf("indice_tabla:  %d\n",indice_tabla);
 
 				//Agregar valor a la tabla
 				int length = strlen(yylval.valor_string);
+				// printf("length-------------------%d\n",length);
+				// printf("-------------------%s\n",yylval.valor_string);
+
 				char auxiliar[length];
 				strcpy(auxiliar,yylval.valor_string);
+
+				
 				auxiliar[strlen(auxiliar)-1] = '\0';
+				
 				strcpy(tabla_simbolo[indice_tabla].valor_s, auxiliar+1);
+				printf("Agregar valor a la tabla: tabla_simbolo[indice_tabla].valor_s-------------------%s\n",tabla_simbolo[indice_tabla].valor_s);	
+				printf("indice_tabla:  %d\n",indice_tabla);
+				
 				//Agregar longitud
 				tabla_simbolo[indice_tabla].longitud = length -2;
+				printf("Agregar longitud: tabla_simbolo[indice_tabla].longitud-------------------%d\n",tabla_simbolo[indice_tabla].longitud);
+				printf("indice_tabla:  %d\n",indice_tabla);	
 				
 			}
+			
 		break;
 
 			case SinTipo:
@@ -195,6 +214,61 @@ void agregarCteATabla(int num){
 	}
 }
 
+void insertaMensaje (char * mensaje) {
+			char nombre[100];
+			strcpy(nombre,normalizarNombre(mensaje));
+			printf("nombre-------------------%s\n",nombre);	
+			memmove(&nombre[0], &nombre[1], strlen(nombre));//Remover el primer guion "_"
+			if(buscarEnTabla(nombre) == -1){
+			//Agregar nombre a tabla
+				indice_tabla ++;
+				strcpy(tabla_simbolo[indice_tabla].nombre,normalizarNombre(mensaje));
+				// printf("Agregar nombre a tabla: tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);	
+				// printf("indice_tabla:  %d\n",indice_tabla);
+				// printf("tabla_simbolo[indice_tabla].nombre-------------------%s\n",tabla_simbolo[indice_tabla].nombre);				
+				//Agregar tipo de dato
+				tabla_simbolo[indice_tabla].tipo_dato = CteString;
+				// printf("Agregar tipo de dato: tabla_simbolo[indice_tabla].tipo_dato-------------------%d\n",tabla_simbolo[indice_tabla].tipo_dato);
+				// printf("indice_tabla:  %d\n",indice_tabla);
+
+				//Agregar valor a la tabla
+				int length = strlen(mensaje);
+				// printf("length-------------------%d\n",length);
+				// printf("-------------------%s\n",mensaje);
+
+				char auxiliar[length];
+				strcpy(auxiliar,mensaje);
+
+				
+				auxiliar[strlen(auxiliar)-1] = '\0';
+				
+				strcpy(tabla_simbolo[indice_tabla].valor_s, auxiliar+1);
+				// printf("Agregar valor a la tabla: tabla_simbolo[indice_tabla].valor_s-------------------%s\n",tabla_simbolo[indice_tabla].valor_s);	
+				// printf("indice_tabla:  %d\n",indice_tabla);
+				
+				//Agregar longitud
+				tabla_simbolo[indice_tabla].longitud = length -2;
+				// printf("Agregar longitud: tabla_simbolo[indice_tabla].longitud-------------------%d\n",tabla_simbolo[indice_tabla].longitud);
+				// printf("indice_tabla:  %d\n",indice_tabla);	
+				
+			}
+}
+
+void insertarEntero(int numero) {
+			char nombre[100];
+			sprintf(nombre, "%d", numero);
+			//Si no hay otra variable con el mismo nombre...
+			if(buscarEnTabla(nombre) == -1){
+			//Agregar nombre a tabla
+				indice_tabla++;
+				strcpy(tabla_simbolo[indice_tabla].nombre,normalizarId(nombre));
+			//Agregar tipo de dato
+				tabla_simbolo[indice_tabla].tipo_dato = CteInt;
+			//Agregar valor a la tabla
+				tabla_simbolo[indice_tabla].valor_i = numero;
+			}	
+}
+
 
 char* normalizarNombre(const char* nombre){
     char *aux = (char *) malloc( sizeof(char) * (strlen(nombre)) + 2);
@@ -203,7 +277,7 @@ char* normalizarNombre(const char* nombre){
 	strcpy(retor,nombre);
 	int len = strlen(nombre);
 	retor[len-1] = '\0';
-	
+		
 	strcpy(aux,"_");
 	strcat(aux,++retor);
 
@@ -307,6 +381,20 @@ void escribirEnCeldaX(int posicion) {
 	polaca_inversa[posicion].celda.tipo_dato=7;
 }
 
+void escribirEnCeldaXMasUno(int posicion) {
+	char * str_aux;
+	int cursor_tmp;
+	cursor_tmp = cursor+1;
+	// printf("posicion a escribir: %d", posicion);
+	// printf("cursor a escribir: %d", cursor_tmp);
+
+    sprintf(str_aux, "#ETIQ%d",cursor_tmp);
+	// printf("str_aux: %s", str_aux);
+    strcpy(polaca_inversa[posicion].celda.dato,str_aux);
+    // strcpy(polaca_inversa[posicion].celda.tipo_dato,"ETIQ");
+	polaca_inversa[posicion].celda.tipo_dato=7;
+}
+
 void grabarPolaca(){
 	
 	int i;
@@ -374,7 +462,7 @@ void generarAsm(){
 	
 	//Auxiliares
 	for(i=0;i<auxOperaciones;i++){
-		fprintf(pf,"\t@_auxR%d \tDD 0.0\n",i);
+		// fprintf(pf,"\t@_auxR%d \tDD 0.0\n",i);
 		fprintf(pf,"\t@_auxE%d \tDD 0\n",i);
 	}
 
@@ -560,6 +648,10 @@ void tratarCelda(tInfo *cel,FILE *pf){
 	//<=
 	if(strcmp(aux_str,"BGT")==0){
 		fprintf(pf,"\tfcomp\n\tfstsw\tax\n\tfwait\n\tsahf\n\tja\t\t");
+	}
+
+	if(strcmp(aux_str,"BI")==0){
+		fprintf(pf,"\tjmp\t\t");
 	}
 
 	//ETIQUETAS

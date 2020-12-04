@@ -9,7 +9,7 @@ rem pause
 rem pause
 echo OK   Compilado y generado .exe
 @echo on
-Compilar.exe test.txt
+Compilar.exe test_impar_insuf.txt
 @echo off
 del lex.yy.c
 del y.tab.c

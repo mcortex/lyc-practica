@@ -57,6 +57,7 @@ void muestraPolaca();
 void grabarPolaca();
 void avanzar();
 void escribirEnCeldaX(int);
+void escribirEnCeldaXMasUno(int);
 
 // --- FUNCIONES TS
 void mensajeDeError(enum tipoError error,const char* info, int linea);
@@ -73,6 +74,9 @@ char* reemplazarCaracter(char* aux);
 char* normalizarId(const char* cadena);
 void validarCteEnTabla(char* nombre,int linea);
 void agregarValorACte(int tipo);
+void insertaMensaje (char * mensaje);
+void insertarEntero(int numero);
+
 // int verificarTipoDato(tArbol * p,int linea);
 // void verificarTipo(tArbol* p,int tipoAux,int linea);
 

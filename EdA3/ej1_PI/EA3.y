@@ -35,14 +35,14 @@ int indiceDatoADeclarar = 0;
 int indice_tabla = -1;
 int auxOperaciones=0;
 int contCond=0;
-
+int nulo=0;
 
 st *pilaPosicion;
 
 
-char * msg_error1="No existen suficientes elementos impares para el calculo";
-char * msg_error2="La lista tiene menos elementos que el indicado";
-char * msg_error3="La lista está vacia";
+char * msg_error1="\"No existen suficientes elementos impares\"";
+char * msg_error2="\"La lista tiene menos elementos que el indicado\"";
+char * msg_error3="\"La lista esta vacia\"";
 
 %}
 
@@ -84,6 +84,8 @@ s:
     {
     printf("**Inicia COMPILADOR**\n");
     pilaPosicion = createEmptyStack();
+    insertaMensaje(msg_error1);
+    insertaMensaje(msg_error2);
     } 
     prog {fprintf(fp,"0. S -> PROG \n"); }
     {
@@ -141,16 +143,22 @@ asig:
                         agregarVarATabla("@tope",!ES_CTE_CON_NOMBRE,yylineno);
 			            cantVarsADeclarar++;
                         tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
-                        // agregarVarATabla("@aux",!ES_CTE_CON_NOMBRE,yylineno);
+                        // agregarVarATabla("@cant_elem",ES_CTE_CON_NOMBRE,yylineno);
 			            // cantVarsADeclarar++;
                         // tipoDatoADeclarar[indiceDatoADeclarar++] = Integer;
 
                         if(lista_vacia_flag == 1){
-                            printf("%s = 0 -  %s\n",$1,msg_error3);
+                            printf("-- %s = 0 -  %s-- \n",$1,msg_error3);
 
                             insertaEnPolaca(msg_error3,CteString);
                             insertaEnPolaca("WRITE",SinTipo);
                             insertaEnPolaca("0",CteInt);
+                            
+                            // strcpy(yylval.valor_string,msg_error3);
+                            // agregarCteATabla(CteString);
+                            // agregarValorACte(CteString);
+                            
+                            
                             }
                         else {
                             printf("Asigna resultado a id(%s)\n",$1);
@@ -158,59 +166,95 @@ asig:
                             }
                         insertaEnPolaca($1,CteInt);
                         insertaEnPolaca("=",SinTipo);
-                                                
+
+                                        
                         }
     ;
 
 sumaimpar:
-            SUMAIMPAR PARA ID PYC CA lista CC PARC {
-                                    fprintf(fp,"6. SUMAIMPAR -> sumaimpar para id pyc ca LISTA cc parc\n");
-                                    // printf("cantidad de componentes: %d\n",cant_elem);
-                                    // printf("cantidad de impares: %d\n",cant_impares);
-                                    
-                                    int pos = chequearVarEnTabla($3,yylineno);
+            SUMAIMPAR PARA ID PYC CA {int pos = chequearVarEnTabla($3,yylineno);
             
+                                    
+                                    
+            
+            
+            } lista CC PARC {
+                                    fprintf(fp,"6. SUMAIMPAR -> sumaimpar para id pyc ca LISTA cc parc\n");
+                                    printf("cantidad de componentes: %d\n",cant_elem);
+                                    printf("cantidad de impares: %d\n",cant_impares);
+                                    
+                                    
 
-                                    // //IF(cant_elem<id)
-                                    // sprintf(str_aux, "%d",cant_elem);
-                                    // insertaEnPolaca(cant_elem);
-                                    // insertaEnPolaca(id);
-                                    // insertaEnPolaca("CMP");
-                                    // insertaEnPolaca("BGE";
-                                    // push(pilaPosicion,cursor);//apilar #celda actual; 
-                                    // avanzar();
-                                    // //THEN
-                                    // insertaEnPolaca(msg_error2);
-                                    // insertaEnPolaca("BI");
-                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
-                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
-                                    // push(pilaPosicion,cursor);//apilar #celda actual;
-                                    // avanzar();
-                                    // //ELSE
-                                    // //IF(cant_impares>=id)
-                                    // insertaEnPolaca(cant_impares);
-                                    // insertaEnPolaca(id);
-                                    // insertaEnPolaca("CMP");
-                                    // insertaEnPolaca("BLT");
-                                    // push(pilaPosicion,cursor);//apilar #celda actual; 
-                                    // avanzar();
-                                    // //THEN
-                                    // insertaEnPolaca(msg_error1);
-                                    // insertaEnPolaca("BI");
-                                    // pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
-                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
-                                    // push(pilaPosicion,cursor);//apilar #celda actual;
-                                    // avanzar();
-                                    // //ELSE
-                                    // insertaEnPolaca(id);
-                                    // escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
-                                    // push(pilaPosicion,cursor);//apilar #celda actual;
+                                    insertarEntero(cant_elem);
+                                    insertarEntero(cant_impares);
+                                    insertarEntero(nulo);
+            
+                                    // IF cant_elem < tope
+                                    sprintf(str_aux, "%d",cant_elem);
+                                    insertaEnPolaca(str_aux,CteInt);
+                                    insertaEnPolaca("@tope",Integer);
+                                    insertaEnPolaca("CMP",SinTipo); // cant_elem < tope? true: La lista tiene menos elementos que el indicado, false: siguiente if
+                                    insertaEnPolaca("BGE",SinTipo);
+                                    push(pilaPosicion,cursor); // apilar nro celda actual
+                                    avanzar();
+                                    //THEN
+                                    insertaEnPolaca(msg_error2,CteString); //La lista tiene menos elementos que el indicado
+                                    insertaEnPolaca("WRITE",SinTipo);
+
+                                    insertaEnPolaca("0",CteInt);
+                                    insertaEnPolaca("@suma",CteInt);
+                                    insertaEnPolaca("=",SinTipo);
+                                    
+                                    insertaEnPolaca("BI",SinTipo);
+                                    pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    escribirEnCeldaXMasUno(pos_aux); // Escribir en la celda X, el nº de celda actual + 1
+                                    push(pilaPosicion,cursor); // apilar nro celda actual
+                                    avanzar();
+                                    // FIN THEN
+                                    sprintf(str_aux, "#ETIQ%d:",cursor);
+                                    insertaEnPolaca(str_aux,SinTipo);
+                                    // ELSE
+                                    // IF cant_impares < tope
+                                    sprintf(str_aux, "%d",cant_impares);
+                                    insertaEnPolaca(str_aux,CteInt);
+                                    insertaEnPolaca("@tope",Integer);
+                                    insertaEnPolaca("CMP",SinTipo); // cant_impares < tope? true: No existen suficientes elementos impares, false: siguiente if
+                                    insertaEnPolaca("BGE",SinTipo);
+                                    push(pilaPosicion,cursor); // apilar nro celda actual
+                                    avanzar();
+                                    insertaEnPolaca(msg_error1,CteString); //No existen suficientes elementos impares
+                                    insertaEnPolaca("WRITE",SinTipo);
+
+                                    insertaEnPolaca("0",CteInt);
+                                    insertaEnPolaca("@suma",CteInt);
+                                    insertaEnPolaca("=",SinTipo);
+
+                                    pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1 
+                                    sprintf(str_aux, "#ETIQ%d:",cursor);
+                                    insertaEnPolaca(str_aux,SinTipo);
+                                    //FIN ELSE
+                                    pos_aux=pop(pilaPosicion); // desapilarX (tope_pila)
+                                    escribirEnCeldaX(pos_aux); // Escribir en la celda X, el nº de celda actual + 1 
+                                    sprintf(str_aux, "#ETIQ%d:",cursor);
+                                    insertaEnPolaca(str_aux,SinTipo);
+
+
+                                    
 
                                     }
             | SUMAIMPAR PARA ID PYC CA CC PARC {
                                 int pos = chequearVarEnTabla(yylval.valor_string,yylineno);
                                 fprintf(fp,"7. SUMAIMPAR -> sumaimpar para id pyc ca cc parc\n");
                                 lista_vacia_flag=1;
+                                // strcpy(yylval.valor_string,msg_error3);
+                                // agregarCteATabla(CteString);
+
+                                insertaMensaje(msg_error3);
+
+                                // yylval.valor_int=nulo;
+                                // agregarCteATabla(CteInt);
+                                insertarEntero(nulo);
                                 }
             ;
 
